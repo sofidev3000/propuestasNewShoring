@@ -21,7 +21,7 @@ const articles = data.articles;
   </h2>
 </div>
 <section
-  class="w-full max-w-[1600px] flex flex-wrap items-start justify-between gap-5 text-[secundary-color] pb-20"
+  class="w-full max-w-[1600px] flex flex-wrap items-start justify-center gap-5 text-[secundary-color] pb-20"
 >
   <div class="flex flex-1 flex-col w-full  max-w-[1066.55px]  ">
     {
@@ -118,11 +118,11 @@ const articles = data.articles;
     class="hidden xl:flex h-full min-h-[100dvh] border-l border-1 border-[--divider-secundary]"
   >
   </div>
-  <div class="md:basis-[10%] flex flex-col items-center justify-between">
+  <div class="w-full max-w-[485.27px] md:max-w-[533.25px]  flex flex-col items-center justify-between">
     {
       articles.length > 0 ? (
         articles.splice(0, 2).map((article, index) => (
-          <article class="card w-full  mb-6  p-4 rounded *:text-left group">
+          <article class="card w-full  mb-6   *:text-left group">
             <div class="w-full md:max-w-[485.27px] min-w-[360px] overflow-hidden group ">
               <img
                 src={article.featureImage}
