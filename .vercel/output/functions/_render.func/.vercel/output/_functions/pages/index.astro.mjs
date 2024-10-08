@@ -5,7 +5,8 @@ import 'clsx';
 export { renderers } from '../renderers.mjs';
 
 const $$Articles = createComponent(async ($$result, $$props, $$slots) => {
-  const response = await fetch("http://localhost:4322/api/articles");
+  const url = "https://propuestas-new-shoring.vercel.app/api/articles" ;
+  const response = await fetch(url);
   const data = await response.json();
   const articles = data.articles;
   return renderTemplate`${maybeRenderHead()}<div class="w-full !border-[--secundary-color] pt-10 pb-3 border-t-4 border-b self-center my-10" data-astro-cid-szbkhomv>
