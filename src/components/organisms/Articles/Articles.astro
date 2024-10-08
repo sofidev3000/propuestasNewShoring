@@ -1,4 +1,5 @@
 ---
+const {hasExcerpt=true, reverse=false, mainTitle="NEAR NOW!"} = Astro.props;
 const url = "https://propuestas-new-shoring.vercel.app/api/articles"
 // const url = "http://localhost:4322/api/articles"
 
@@ -11,17 +12,17 @@ const articles = data.articles;
 ---
 
 <div
-  class="w-full !border-[--secundary-color] pt-10 pb-3 border-t-4 border-b self-center my-10"
+  class="w-full !border-[--secundary-color] pt-10 pb-3 border-t-4 border-b self-center my-10 max-w-[1600px]"
 >
   <h2
     class="text-left text-3xl font-extrabold text-[--guardsman-red-500]"
     id="near-now"
   >
-    NEAR NOW!
+    {mainTitle}
   </h2>
 </div>
 <section
-  class="w-full max-w-[1600px] flex flex-col md:flex-row flex-wrap items-start justify-center gap-5 text-[secundary-color] pb-20 "
+  class={reverse ? `w-full max-w-[1600px] flex flex-col  md:flex-row-reverse flex-wrap items-start justify-center gap-5 text-[secundary-color] pb-20 ` :`w-full max-w-[1600px] flex flex-col md:flex-row  flex-wrap items-start justify-center gap-5 text-[secundary-color] pb-20 `}
 >
   <div class="flex flex-1 flex-col w-full  lg:max-w-[721.92px] 2xl:max-w-[1066.55px]  ">
     {
@@ -35,13 +36,13 @@ const articles = data.articles;
                 class="w-full h-full object-cover  mb-4 group-hover:scale-110 ease-in duration-300"
               />
             </div>
+            <div class="flex flex-col items-center justify-between text-sm text-[--secundary-color]">
             <h3 class="main-title group-hover:underline tracking-wide text-[1.375rem] 2xl:text-[1.5625rem] font-Merriweather text-center font-[600] my-5 ">
                 {article.title}
-
             </h3>
-            <div class="flex flex-col items-center justify-between text-sm text-[--secundary-color]">
               <p class="text-[0.75rem]">Por  <span class="font-WorkSans font-[600] text-[--text-spans]">{article.author}</span>{" "}
               </p>
+              {hasExcerpt ? <p class="text-[1rem] font-WorkSans pt-3">{article.excerpt}</p> : null}
             </div>
           </article>
         ))
@@ -50,7 +51,38 @@ const articles = data.articles;
       )
     }
     <div class="border-b border-[--divider-secundary] w-full my-5"></div>
-    <div class="w-full flex flex-flex-wrap md:flex-row flex-col items-start justify-between">
+    {
+        hasExcerpt? (
+        <div class="flex gap-2">
+            {
+              articles.length > 0 ? (
+                articles.splice(0, 2).map((article, index) => (
+                  <article class="flex flex-col items-start w-full max-w-[498.95px] min-w-[398px] mb-6  p-4  *:text-center">
+                    <div class=" overflow-hidden group ">
+                      <img
+                        src={article.featureImage}
+                        alt={article.title}
+                        class="w-full h-full object-cover  mb-4 group-hover:scale-110 ease-in duration-300"
+                      />
+                    </div>
+                    <div class="flex flex-col items-center justify-center text-sm text-[--secundary-color] space-y-1 pt-4">
+                      <h3 class=" text-[18px]  xl:text-[21px]  font-[600] font-Merriweather text-center mb-2">
+                        {article.title}
+                      </h3>
+
+                      <p class="text-[1rem] font-WorkSans">{article.excerpt}</p>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <p class="text-gray-600">No articles available.</p>
+              )
+            }
+          </div>
+        )
+        :
+       (
+        <div class="w-full flex flex-flex-wrap md:flex-row flex-col items-start justify-between">
         <div class="flex flex-col gap-2">
             {
               articles.length > 0 ? (
@@ -111,7 +143,9 @@ const articles = data.articles;
               )
             }
           </div>
-    </div>
+    </div>)
+    }
+
   </div>
   </div>
   <div

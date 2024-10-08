@@ -2,7 +2,7 @@ export const articles = [
     {
         id: 1,
         title: "Nearshoring y electromovilidad impulsan crecimiento de mercado industrial en...",
-        excerpt: "Sin embargo, el robustecimiento de la infraestructura de energía eléctrica...",
+        excerpt: "Phoenix Capital Group, an unprofitable oil firm selling high-yield debt to retirees is led by a CEO whose past guilty plea for theft they’d rather you not know about.",
         author: "Global Media",
         date: "Octubre 08, 2024",
         featureImage: "https://nxt-global-media.s3.amazonaws.com/near/images/08102024/f6306611f2.webp"
