@@ -15,6 +15,7 @@ export default {
 			'Poppins': [ 'Poppins', 'sans-serif'],
 			'WorkSans': [  'Work Sans Variable', 'sans-serif'],
 			'Merriweather': [  'Merriweather', 'serif'],
+			'NotoGeorgian': [   'Noto Serif Georgian Variable', 'serif'],
 
 		  },
 		  colors: {
