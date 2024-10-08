@@ -1,0 +1,51 @@
+---
+const {dropdown, url, text, id} = Astro.props;
+---
+
+<button
+  id={`${id}-button`}
+  data-dropdown-toggle={`${id}-menu`}
+  data-dropdown-trigger="hover"
+  class="flex items-center    font-sans text-white hover:text-[--guardsman-red-500] transition-colors"
+  type="button"
+>
+  {text}
+  <svg
+    class="w-2.5 h-2.5 ms-3"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="m1 1 4 4 4-4"></path>
+  </svg>
+</button>
+
+<!-- Dropdown menu -->
+<div
+  id={`${id}-menu`}
+  class="z-10 hidden  divide-y divide-gray-100 rounded-lg shadow-md w-44 bg-gray-950"
+>
+  <ul
+    class="py-2 text-lg md:text-sm text-gray-200 dark:text-gray-200 "
+    aria-labelledby={`${id}-button`}
+  >
+    {
+      dropdown.map((menuItem) => (
+        <li class="first:text-[--guardsman-red-500]">
+          <a
+            href={menuItem.url}
+            class=" block px-4 py-2 hover:bg-gray-800  hover:text-[--guardsman-red-500] "
+          >
+            {menuItem.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

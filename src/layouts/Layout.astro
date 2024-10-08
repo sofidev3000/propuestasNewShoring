@@ -1,50 +1,77 @@
 ---
-interface Props {
-	title: string;
-}
+import TopBar from "@organisms/TopBar/TopBar.astro";
+import BaseHead from "../components/BaseHead.astro";
 
-const { title } = Astro.props;
+import Logo from "@atoms/Logo/Logo.astro";
+import Header from "@organisms/Header/Header.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import HeaderMobile from "@components/organisms/HeaderMobile/HeaderMobile.astro";
+import Footer from "@organisms/Footer/Footer.astro";
+import ButtonToTop from "@components/atoms/ButtonToTop/ButtonToTop.astro";
+import BannerCoockies from "@components/atoms/BannerCoockies/BannerCoockies";
+
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  image = "../../public/img/city.jpg",
+} = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <BaseHead />
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+  </head>
+
+  <body>
+    <BannerCoockies client:only = 'react' />
+    <TopBar />
+
+    <article
+      class=`hidden lg:flex  w-full h-[29dvh] justify-center items-center`
+    >
+      <Logo/>
+    </article>
+    <HeaderMobile />
+    <Header />
+    <main class="overflow-hidden w-full flex flex-col justify-center items-center px-3 pt-20 md:pt-24 xl:pt-1">
+
+      <ButtonToTop />
+      <slot />
+    </main>
+    <Footer />
+
+
+
+    <script
+      type="module"
+      defer
+      src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"
+    ></script>
+    <script>
+      import { initSend } from "@controllers/ApiSend";
+      import { initAOS } from "@utils/aos";
+      import { execLazyLoad } from "@controllers/ImageLazy";
+      import {initProcessTranslate} from '@utils/translatePage';
+
+      document.addEventListener("DOMContentLoaded", function () {
+        execLazyLoad();
+        initAOS();
+        // initProcessTranslate();
+
+
+        const form = document.querySelectorAll(".form-send");
+
+        form.forEach((formItem) => {
+          formItem.addEventListener("submit", function (event) {
+            event.preventDefault();
+            initSend(this as HTMLFormElement);
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>

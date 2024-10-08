@@ -1,0 +1,41 @@
+---
+import ImageLazy from "@components/extras/ImageLazy.astro";
+
+const {
+  animationdirection = "fade-right",
+  textColor = "[--secundary-color]",
+  fontSize = "",
+  fontSizeSlogan = "",
+  isMobile = false,
+} = Astro.props;
+---
+
+{
+  isMobile ? (
+    <a
+      data-aos={animationdirection}
+      href="/"
+      class={`flex  w-fit flex-col  -top-[1.4rem] font-normal text-${textColor} relative w-[40%] min-w-[15rem]`}
+    >
+        <ImageLazy
+            src="/img/logo/nearShoringLogoBlack.svg"
+            width="200"
+            height="114"
+            className="pt-5 relative "
+            classNameImage="logo__img--mobile"
+            slot="image"
+          />
+    </a>
+  ) : (
+    <a data-aos={animationdirection} href="/" class={`logo hidden md:flex flex-col w-[43%] max-w-[30rem] 2xl:max-w-[45rem]`}>
+      <ImageLazy
+            src="/img/logo/nearShoringLogoBlack.svg"
+            width="200"
+            height="114"
+            className="pt-[20%] relative "
+            classNameImage="h-full logo__img"
+            slot="image"
+          />
+    </a>
+  )
+}
