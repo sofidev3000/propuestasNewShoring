@@ -53,7 +53,7 @@ const articles = data.articles;
     <div class="border-b border-[--divider-secundary] w-full my-5"></div>
     {
         hasExcerpt? (
-        <div class="flex gap-2 w-full">
+        <div class="flex gap-2 w-full flex-wrap">
             {
               articles.length > 0 ? (
                 articles.splice(0, 2).map((article, index) => (
