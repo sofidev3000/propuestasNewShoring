@@ -1,7 +1,7 @@
 ---
 const {hasExcerpt=true, reverse=false, mainTitle="NEAR NOW!"} = Astro.props;
-const url = "https://propuestas-new-shoring.vercel.app/api/articles"
-// const url = "http://localhost:4322/api/articles"
+// const url = "https://propuestas-new-shoring.vercel.app/api/articles"
+ const url = "http://localhost:4322/api/articles"
 
 
 const response = await fetch(url);
@@ -40,9 +40,9 @@ const articles = data.articles;
             <h3 class="main-title group-hover:underline tracking-wide text-[1.375rem] 2xl:text-[1.5625rem] font-Merriweather text-center font-[600] my-5 ">
                 {article.title}
             </h3>
-              <p class="text-[0.75rem]">Por  <span class="font-WorkSans font-[600] text-[--text-spans]">{article.author}</span>{" "}
+              <p class="ecerpts text-[0.75rem]">Por  <span class="font-WorkSans font-[600] text-[--text-spans]">{article.author}</span>{" "}
               </p>
-              {hasExcerpt ? <p class="text-[1.0875rem] font-NotoGeorgian font-[100] text-[ --text-spans] pt-3 ">{article.excerpt}</p> : null}
+              {hasExcerpt ? <p class="ecerpts text-[1.0875rem] font-NotoGeorgian font-[100] text-[ --text-spans] pt-3 ">{article.excerpt}</p> : null}
             </div>
           </article>
         ))
@@ -56,7 +56,7 @@ const articles = data.articles;
         <div class="flex gap-2 w-full flex-wrap">
             {
               articles.length > 0 ? (
-                articles.splice(0, 2).map((article, index) => (
+                articles.splice(0, 2).map((article) => (
                   <article class="flex flex-col items-start w-full lg:max-w-[336.94px] 2xl:max-w-[498.95px] mb-6  p-4  *:text-center">
                     <div class="w-full lg:h-[189.52px] 2xl:h-[280.70px] overflow-hidden group  ">
                       <img
@@ -66,11 +66,11 @@ const articles = data.articles;
                       />
                     </div>
                     <div class="flex flex-col items-center justify-center text-sm text-[--secundary-color] space-y-1 pt-4">
-                      <h3 class=" text-[18px]  xl:text-[21px]  font-[600] font-Merriweather text-center mb-2">
+                      <h3 class="main-title text-[18px]  xl:text-[21px]  font-[600] font-Merriweather text-center mb-2">
                         {article.title}
                       </h3>
 
-                      <p class="text-[1.0875rem] font-NotoGeorgian font-[100] text-[ --text-spans]">{article.excerpt}</p>
+                      <p class="ecerpts text-[1.0875rem] font-NotoGeorgian font-[100] text-[ --text-spans]">{article.excerpt}</p>
                     </div>
                   </article>
                 ))
@@ -97,7 +97,7 @@ const articles = data.articles;
                     </div>
 
                     <div class="flex flex-col items-start justify-center text-sm text-[--secundary-color]">
-                      <h3 class=" text-[0.9375rem] xl:text-[1.0625rem]  font-bold font-Merriweather text-left mb-1">
+                      <h3 class="main-title text-[0.9375rem] xl:text-[1.0625rem]  font-bold font-Merriweather text-left mb-1">
                         {article.title}
                       </h3>
                       <p class="text-[0.75rem] ">
@@ -129,7 +129,7 @@ const articles = data.articles;
                     </div>
 
                     <div class="flex flex-col items-start justify-center text-sm text-[--secundary-color]">
-                      <h3 class=" text-[0.9375rem] xl:text-[1.0625rem]  font-bold font-Merriweather text-left mb-1">
+                      <h3 class="main-title text-[0.9375rem] xl:text-[1.0625rem]  font-bold font-Merriweather text-left mb-1">
                         {article.title}
                       </h3>
                       <p class="text-[0.75rem] ">
@@ -167,7 +167,7 @@ const articles = data.articles;
             <h3 class=" text-[1.3125rem] mt-5 mb-4 font-bold font-Merriweather text-left group-hover:underline">
               {article.title}
             </h3>
-            <div class="flex flex-col items-left justify-between text-sm text-[--secundary-color]">
+            <div class="main-title flex flex-col items-left justify-between text-sm text-[--secundary-color]">
               <p class="text-[0.75rem]">
                 Por  <span class="font-WorkSans font-[600] text-[--text-spans]"> {article.author}</span>
               </p>
@@ -200,5 +200,19 @@ const articles = data.articles;
   }
   .card:hover .img__container::after {
     transform: scale(1);
+  }
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .main-title, .ecerpts {
+      text-align: left;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   }
 </style>
